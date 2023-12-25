@@ -2,7 +2,8 @@ name: Build and publish container images
 
 on:
   push:
-    branches: ['ds-ci']
+    branches:
+      - main
 
 env:
   REGISTRY: ghcr.io
