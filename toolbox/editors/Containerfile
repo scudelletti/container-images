@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-toolbox:39
+FROM ghcr.io/scudelletti/fedora-base-toolbox:latest
 
 # Sublime Text Repository
 RUN rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg && \

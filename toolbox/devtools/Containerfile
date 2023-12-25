@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-toolbox:39
+FROM ghcr.io/scudelletti/fedora-base-toolbox:latest
 
 # ASDF dependencies
 RUN dnf -y update && \
