@@ -1,0 +1,39 @@
+name: Build and publish container images
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-toolbox:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        name:
+          - fedora-base
+          - devtools
+          - editors
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push container image
+        uses: docker/build-push-action@v5
+        with:
+          file: toolbox/${{ matrix.name }}/Containerfile
+          context: toolbox/${{ matrix.name }}/
+          push: true
+          tags: ghcr.io/scudelletti/${{ matrix.name }}-toolbox:latest
