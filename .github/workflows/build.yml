@@ -1,4 +1,4 @@
-name: Create and publish container images
+name: Build and publish container images
 
 on:
   push:
@@ -9,11 +9,17 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-and-push-image:
+  build-and-push-toolbox:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+    strategy:
+      matrix:
+        name:
+          - fedora-base
+          - devtools
+          - editors
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,7 +32,7 @@ jobs:
       - name: Build and push container image
         uses: docker/build-push-action@v5
         with:
-          file: toolbox/fedora-base/Containerfile
-          context: toolbox/fedora-base/
+          file: toolbox/${{ matrix.name }}/Containerfile
+          context: toolbox/${{ matrix.name }}/
           push: true
-          tags: ghcr.io/scudelletti/fedora-base-toolbox:latest
+          tags: ghcr.io/scudelletti/${{ matrix.name }}-toolbox:latest
