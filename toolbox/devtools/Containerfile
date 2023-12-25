@@ -1,0 +1,13 @@
+FROM registry.fedoraproject.org/fedora-toolbox:39
+
+# ASDF dependencies
+RUN dnf -y update && \
+    dnf -y upgrade && \
+    dnf -y install curl git && \
+# Erlang dependencies
+    dnf -y groupinstall -y 'Development Tools' 'C Development Tools and Libraries' && \
+    dnf -y install autoconf ncurses-devel wxGTK-devel wxBase openssl-devel libxslt fop && \
+# Ruby dependencies
+    dnf install -y autoconf gcc rust patch make bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel && \
+# Cleanup
+    dnf clean all
