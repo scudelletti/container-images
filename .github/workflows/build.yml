@@ -43,6 +43,7 @@ jobs:
         name:
           - devtools
           - editors
+          - pdf-tools
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
