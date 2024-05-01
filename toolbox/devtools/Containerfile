@@ -1,14 +1,16 @@
 FROM ghcr.io/scudelletti/fedora-base-toolbox:latest
 
-# ASDF dependencies
+# General dependencies
 RUN dnf -y update && \
     dnf -y upgrade && \
+    dnf -y install ag && \
+# ASDF dependencies
     dnf -y install curl git && \
 # Erlang dependencies
     dnf -y groupinstall -y 'Development Tools' 'C Development Tools and Libraries' && \
     dnf -y install autoconf ncurses-devel wxGTK-devel wxBase openssl-devel libxslt fop && \
 # Phoenix dependencies
-    dnf -y inotify-tools
+    dnf -y install inotify-tools && \
 # Ruby dependencies
     dnf install -y autoconf gcc rust patch make bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel && \
 # Cleanup
