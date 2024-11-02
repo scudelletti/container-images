@@ -2,7 +2,7 @@ FROM ghcr.io/scudelletti/fedora-base-toolbox:latest
 
 # Sublime Text Repository
 RUN rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg && \
-    dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+    dnf config-manager addrepo --from-repofile=https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 
 # VSCode Repository
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \

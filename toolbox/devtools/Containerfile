@@ -7,7 +7,8 @@ RUN dnf -y update && \
 # ASDF dependencies
     dnf -y install curl git && \
 # Erlang dependencies
-    dnf -y groupinstall -y 'Development Tools' 'C Development Tools and Libraries' && \
+# Tip: list groups using `dfn group list`
+    dnf -y group install development-tools c-development && \
     dnf -y install autoconf ncurses-devel wxGTK-devel wxBase openssl-devel libxslt fop && \
 # Phoenix dependencies
     dnf -y install inotify-tools && \
